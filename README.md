@@ -68,7 +68,7 @@ Anaconda The open-source [Anaconda Distribution](https://www.anaconda.com/distri
 
 * **Ahmed Sherif** - *Initial work* - [Ahmed sherif](https://github.com/ahmedsherif55)
 * **Ahmed Khaled** - *Initial work* - [Ahmed Khaled](https://github.com/AhmedKhaledAbdalla)
-* **Ahmed Samir** - *Initial work* - [Ahmed Samir]()
+* **Ahmed Samir** - *Initial work* - [Ahmed Samir](https://github.com/AhmedSamir848)
 * **Khaled Amin** - *Initial work* - [Khaled Amin]()
 * **Menna Mohamed** - *Initial work* - [Menna Mohamed]()
 
