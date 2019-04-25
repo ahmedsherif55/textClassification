@@ -69,7 +69,7 @@ Anaconda The open-source [Anaconda Distribution](https://www.anaconda.com/distri
 * **Ahmed Sherif** - *Initial work* - [Ahmed sherif](https://github.com/ahmedsherif55)
 * **Ahmed Khaled** - *Initial work* - [Ahmed Khaled](https://github.com/AhmedKhaledAbdalla)
 * **Ahmed Samir** - *Initial work* - [Ahmed Samir](https://github.com/AhmedSamir848)
-* **Khaled Amin** - *Initial work* - [Khaled Amin]()
+* **Khaled Amin** - *Initial work* - [Khalid Amin]()
 * **Menna Mohamed** - *Initial work* - [Menna Mohamed]()
 
 See also the list of [contributors](https://github.com/ahmedsherif55/textClassification/graphs/contributors) who participated in this project.
