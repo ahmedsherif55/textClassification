@@ -13,13 +13,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Numpy: sudo pip install -U numpy
-sklearn: pip install sklearn
-Models: pip install pymodels
-Matplotlib : python -m pip install -U matplotlib
-NLTK : sudo pip install -U nltk
-beautifulsoup 'bs4': pip install beautifulsoup4
-Pandas: pip install pandas
+#### Numpy:
+sudo pip install -U numpy
+#### sklearn:
+pip install sklearn
+#### Models:
+pip install pymodels
+#### Matplotlib :
+python -m pip install -U matplotlib
+#### NLTK :
+sudo pip install -U nltk
+#### beautifulsoup 'bs4': 
+pip install beautifulsoup4
+#### Pandas:
+pip install pandas
 
 
 
