@@ -22,7 +22,7 @@ pip install pymodels
 #### Matplotlib :
 python -m pip install -U matplotlib
 #### NLTK :
-sudo pip install -U nltk
+pip install -U nltk
 #### beautifulsoup 'bs4': 
 pip install beautifulsoup4
 #### Pandas:
@@ -55,7 +55,7 @@ these are supervised learning methods based on applying Bayes' theorem with stro
 HTML decoding using lxml
 
 #### filter_data:
-1- Remove parentheses, brackets and special symbols from inputز
+1- Remove parentheses, brackets and special symbols from input.
 2- Doesn't remove numbers, lower case characters, #, +, _ or space;(because they are found in calsses such as: "c++, c#")    
 3- Transform words to lower case letters, make lemmetization & Filter stop words from text
 
@@ -69,7 +69,7 @@ Anaconda The open-source [Anaconda Distribution](https://www.anaconda.com/distri
 * **Ahmed Sherif** - *Initial work* - [Ahmed sherif](https://github.com/ahmedsherif55)
 * **Ahmed Khaled** - *Initial work* - [Ahmed Khaled](https://github.com/AhmedKhaledAbdalla)
 * **Ahmed Samir** - *Initial work* - [Ahmed Samir](https://github.com/AhmedSamir848)
-* **Khaled Amin** - *Initial work* - [Khaled Amin]()
+* **Khaled Amin** - *Initial work* - [Khalid Amin]()
 * **Menna Mohamed** - *Initial work* - [Menna Mohamed]()
 
 See also the list of [contributors](https://github.com/ahmedsherif55/textClassification/graphs/contributors) who participated in this project.
