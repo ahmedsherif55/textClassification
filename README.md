@@ -55,7 +55,7 @@ these are supervised learning methods based on applying Bayes' theorem with stro
 HTML decoding using lxml
 
 #### filter_data:
-1- Remove parentheses, brackets and special symbols from input
+1- Remove parentheses, brackets and special symbols from input.
 2- Doesn't remove numbers, lower case characters, #, +, _ or space;(because they are found in calsses such as: "c++, c#")    
 3- Transform words to lower case letters, make lemmetization & Filter stop words from text
 
