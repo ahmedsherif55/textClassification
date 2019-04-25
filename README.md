@@ -22,7 +22,7 @@ pip install pymodels
 #### Matplotlib :
 python -m pip install -U matplotlib
 #### NLTK :
-sudo pip install -U nltk
+pip install -U nltk
 #### beautifulsoup 'bs4': 
 pip install beautifulsoup4
 #### Pandas:
