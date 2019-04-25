@@ -1,7 +1,7 @@
 from preprocessing import PreProcessing
 #from Models import NaiveBayes
 from sklearn.model_selection import train_test_split
-from Models import logisticR
+from Models import logisticR,SVM
 
 data = PreProcessing()
 #data.plot_figures()
@@ -13,5 +13,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 #nb = NaiveBayes(X_train, X_test, y_train, y_test, data.tags)
 #nb.train()
 
-lg = logisticR(X_train, X_test, y_train, y_test, data.tags)
-lg.train()
+#lg = logisticR(X_train, X_test, y_train, y_test, data.tags)
+#lg.train()
+
+modle = SVM(X_train, X_test, y_train, y_test, data.tags)
+modle.train()
