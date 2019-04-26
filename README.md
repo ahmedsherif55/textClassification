@@ -1,7 +1,6 @@
-# Topic modelling
+# Text Classification
 
-Topic modelling is the process of finding groups of co-occurring words in texts. These groups are called "topics". The same word can appear in different topics due to its ambiguity, and words that mean the same are meant to appear in the same topic.
-Topic modelling can be used to solve both text classification and clustering. Topic Model used to discover topics across various text documents
+is one of the important and typical task in supervised machine learning (ML). Assigning categories to documents, which can be a web page, library book, media articles, gallery etc. has many applications like e.g. spam filtering, email routing, sentiment analysis etc. In this article, I would like to demonstrate how we can do text classification using python, scikit-learn and little bit of NLTK.
 
 #### Dataset: 
 We are using a relatively large data set of Stack Overflow questions and tags. The data is available in Google BigQuery,
@@ -63,6 +62,8 @@ HTML decoding using lxml
 
 Anaconda The open-source [Anaconda Distribution](https://www.anaconda.com/distribution/) the easiest way to perform Python/R data science and machine learning on Linux, Windows, and Mac OS X
 
+## Algorithms Explanation
+you can find them through [document.md]().
 
 ## Authors
 
