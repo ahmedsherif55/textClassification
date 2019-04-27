@@ -63,13 +63,13 @@ class NaiveBayes(Model):
 class LR(Model):
     def __init__(self, X_train, X_test, y_train, y_test, tags):
         Model.__init__(self, X_train, X_test, y_train, y_test, tags)
-        self.model = LogisticRegression(n_jobs=1, C=1e5, solver='lbfgs', multi_class='auto')
+        self.model = LogisticRegression(n_jobs=1, C=1e5, solver='lbfgs', multi_class='auto', max_iter=1000)
 
 
 class SVM(Model):
     def __init__(self, X_train, X_test, y_train, y_test, tags):
         Model.__init__(self, X_train, X_test, y_train, y_test, tags)
-        self.model = SGDClassifier()
+        self.model = SGDClassifier(max_iter=1000, tol=1e-3)
 
 
 class Word2VecDeep:
