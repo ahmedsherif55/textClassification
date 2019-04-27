@@ -8,6 +8,8 @@ import gensim
 from bs4 import BeautifulSoup
 import time
 import numpy as np
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
 
 
 class PreProcessing:
@@ -138,3 +140,19 @@ class PreProcessing:
         """
             # Stack all of np arrays into one dimensional array (flattened)
         return np.vstack([self.word_averaging(glove_model, post) for post in text_list])
+
+    def filter_rnn(self):
+        # The maximum number of words to be used. Most frequeunt words
+        MAX_NB_WORDS = 50000
+        # Max number of words in each complaint.
+        MAX_SEQUENCE_LENGTH = 250
+        tokenizer = Tokenizer(num_words=MAX_NB_WORDS, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~', lower=True)
+        tokenizer.fit_on_texts(self.data['post'].values)
+        word_index = tokenizer.word_index
+        print('Found %s unique tokens.' % len(word_index))
+
+        X = tokenizer.texts_to_sequences(self.data['post'].values)
+        X = pad_sequences(X, maxlen=MAX_SEQUENCE_LENGTH)
+        Y = pd.get_dummies(self.data['tags']).values
+        print('Shape of label tensor:', Y.shape)
+        return X, Y

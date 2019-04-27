@@ -13,6 +13,10 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.preprocessing import text
 from keras import utils
+from keras.layers import Dense, Embedding, LSTM, SpatialDropout1D
+from keras.callbacks import EarlyStopping
+from keras.callbacks import Callback
+from sklearn.metrics import f1_score, precision_score, recall_score
 
 class Model:
     def __init__(self, X_train, X_test, y_train, y_test, tags):
@@ -31,29 +35,24 @@ class Model:
             self.X_train = tfidf_vector.fit_transform(self.X_train)
             self.X_test = tfidf_vector.transform(self.X_test)
 
-        """scoring = {'acc': 'accuracy',
-           'prec_macro': 'precision_macro',
-           'rec_micro': 'recall_macro',
-           'f1_micro': 'f1_macro'}
+        scoring = {'acc': 'accuracy',
+                   'prec_macro': 'precision_macro',
+                   'rec_micro': 'recall_macro',
+                   'f1_micro': 'f1_macro'}
 
 
-            scores = cross_validate(self.model,
-                        self.X_train,
-                        self.y_train,
-                        cv=5,
-                        scoring=scoring,
-                        return_train_score=True)
-
-        for metric_name in scores.keys():
-            average_score = np.average(scores[metric_name])
-            print('%s : %f' % (metric_name, average_score))"""
-
+        scores = cross_validate(self.model,
+                    self.X_train,
+                    self.y_train,
+                    cv=5,
+                    scoring=scoring,
+                    return_train_score=True)
 
         self.model.fit(self.X_train, self.y_train)
         y_pred = self.model.predict(self.X_test)
         print('accuracy %s' % accuracy_score(self.y_test, y_pred))
         print(classification_report(self.y_test, y_pred, target_names=self.tags))
-        return f1_score(self.y_test, y_pred)
+        return scores
 
 
 class NaiveBayes(Model):
@@ -113,7 +112,6 @@ class Word2VecDeep:
         return tokens
 
 
-
 class BOWDeep:
     def __init__(self, X_train, X_test, y_train, y_test, tags):
         self.X_train = X_train
@@ -156,16 +154,70 @@ class BOWDeep:
         self.y_train = utils.to_categorical(self.y_train, self.num_classes)
         self.y_test = utils.to_categorical(self.y_test, self.num_classes)
 
+        self.metrics = Metrics()
+
     def train(self):
-        self.model.fit(self.X_train, self.y_train,
-                       batch_size=self.batch_size,
-                       epochs=self.epochs,
-                       verbose=True,
-                       validation_split=0.1)
+        self.model.fit(self.X_train, self.y_train, epochs=self.epochs, batch_size=self.batch_size,
+                       verbose=True, validation_split=0.1,
+                       callbacks=[self.metrics,
+                                  EarlyStopping(monitor='val_loss', patience=3, min_delta=0.0001)])
 
         score = self.model.evaluate(self.X_test, self.y_test,
                                     batch_size=self.batch_size, verbose=True)
         print('Test accuracy:', score[1])
-        y_pred = self.model.predict(self.X_test,
+        return self.metrics.get_f1_scores()
+
+
+class RNN:
+    def __init__(self, X_train, X_test, y_train, y_test, tags):
+        self.X_train = X_train
+        self.y_train = y_train
+        self.X_test = X_test
+        self.y_test = y_test
+        self.epochs = 5
+        self.batch_size = 64
+        self.num_classes = len(tags)
+        # The maximum number of words to be used. Most frequeunt words
+        MAX_NB_WORDS = 50000
+        EMBEDDING_DIM = 100
+
+        self.metrics = Metrics()
+
+        self.model = Sequential()
+        self.model.add(Embedding(MAX_NB_WORDS, EMBEDDING_DIM, input_length=self.X_train.shape[1]))
+        self.model.add(SpatialDropout1D(0.2))
+        self.model.add(LSTM(100, dropout=0.2, recurrent_dropout=0.2))
+        self.model.add(Dense(20, activation='softmax'))
+        self.model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    def train(self):
+        self.model.fit(self.X_train, self.y_train, epochs=self.epochs, batch_size=self.batch_size,
+                       verbose=True, validation_split=0.1,
+                       callbacks=[self.metrics,
+                                  EarlyStopping(monitor='val_loss', patience=3, min_delta=0.0001)])
+
+        score = self.model.evaluate(self.X_test, self.y_test,
                                     batch_size=self.batch_size, verbose=True)
-        return f1_score(self.y_test, y_pred)
+        print('Test accuracy:', score[1])
+        return self.metrics.get_f1_scores()
+
+
+class Metrics(Callback):
+    def on_train_begin(self, logs={}):
+        self.val_f1s = []
+        self.val_recalls = []
+        self.val_precisions = []
+
+    def on_epoch_end(self, epoch, logs={}):
+        val_predict = (np.asarray(self.model.predict(self.validation_data[0]))).round()
+        val_targ = self.validation_data[1]
+        _val_f1 = f1_score(val_targ, val_predict, average='micro')
+        _val_recall = recall_score(val_targ, val_predict, average='micro')
+        _val_precision = precision_score(val_targ, val_predict, average='micro')
+        self.val_f1s.append(_val_f1)
+        self.val_recalls.append(_val_recall)
+        self.val_precisions.append(_val_precision)
+        print("— val_f1: {:f} — val_precision: {:f} — val_recall {:f}".format(_val_f1, _val_precision, _val_recall))
+
+    def get_f1_scores(self):
+        return self.val_f1s
