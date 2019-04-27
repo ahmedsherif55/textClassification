@@ -61,3 +61,11 @@ a method to construct such an embedding. It can be obtained using two methods (b
 9- When training the model, we’ll call the fit() method, pass it our training data and labels, batch size and epochs.
 
 ### The Accuracy is 79%
+
+
+## RNN
+Recurrent Neural Networks (RNN) are a powerful and robust type of neural networks and belong to the most promising algorithms out there at the moment because they are the only ones with an internal memory.
+LSTM’s enable RNN’s to remember their inputs over a long period of time. This is because LSTM’s contain their information in a memory, that is much like the memory of a computer because the LSTM can read, write and delete information from its memory.
+
+
+## The Accuracy is 79%
