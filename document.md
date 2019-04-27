@@ -17,7 +17,7 @@ This estimator implements regularized linear models with stochastic
     
     In the linear classifier model, we assumed that training examples plotted in space. These data points are expected to be separated by an apparent gap. It predicts a straight hyperplane dividing 20 classes.
     The primary focus while drawing the hyperplane is on maximizing the distance from hyperplane to the nearest data point of either class. The drawn hyperplane called as a maximum-margin hyperplane
-### The Accuracy is 78% .
+### The Accuracy is 81% .
 
 ## Logistic Regression:
 is the appropriate regression analysis to conduct when the dependent variable is dichotomous (binary).
@@ -28,7 +28,7 @@ In the multiclass case, the training algorithm uses the one-vs-rest (OvR)
     scheme if the 'multi_class' option is set to 'ovr', and uses the cross-
     entropy loss if the 'multi_class' option is set to 'multinomial'.
     
-### The Accuracy is 77%
+### The Accuracy is 78%
 
 ## naive Bayes classifiers
 are a family of simple "probabilistic classifiers" based on applying Bayes' theorem with strong (naive) independence assumptions between the features.
@@ -40,7 +40,7 @@ highly scalable, requiring a number of parameters linear in the number of variab
 is one of the most popular representation of document vocabulary. It is capable of capturing context of a word in a document, semantic and syntactic similarity, relation with other words, etc
 a method to construct such an embedding. It can be obtained using two methods (both involving Neural Networks): Skip Gram and Common Bag Of Words (CBOW)
 
-### The Accuracy is _%
+### The Accuracy is 63%
 
 ## BOW with Keras
  
@@ -54,4 +54,4 @@ a method to construct such an embedding. It can be obtained using two methods (b
 8- When we build our model, all we need to do is tell Keras the shape of our input data, output data, and the type of each layer. keras will look after the rest.
 9- When training the model, we’ll call the fit() method, pass it our training data and labels, batch size and epochs.
 
-### The Accuracy is 90%
+### The Accuracy is 79%
