@@ -40,6 +40,12 @@ highly scalable, requiring a number of parameters linear in the number of variab
 is one of the most popular representation of document vocabulary. It is capable of capturing context of a word in a document, semantic and syntactic similarity, relation with other words, etc
 a method to construct such an embedding. It can be obtained using two methods (both involving Neural Networks): Skip Gram and Common Bag Of Words (CBOW)
 
+1- Load pre trained "Glove" embeddings.
+2- Tokenize words.
+3- Retrieve normalized word vector for each word in each post and calculate mean of vectors (np arrays)
+4- Stack all of np arrays into one dimensional array (flattened)
+5- Fit data to Logistic Regression classifier and predict
+
 ### The Accuracy is 63%
 
 ## BOW with Keras
