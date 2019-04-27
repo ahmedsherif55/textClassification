@@ -14,7 +14,6 @@ from keras.layers import Dense, Activation, Dropout
 from keras.preprocessing import text
 from keras import utils
 
-
 class Model:
     def __init__(self, X_train, X_test, y_train, y_test, tags):
         self.X_train = X_train
@@ -110,3 +109,58 @@ class Word2VecDeep:
                     continue
                 tokens.append(word)
         return tokens
+
+
+
+class BOWDeep:
+    def __init__(self, X_train, X_test, y_train, y_test, tags):
+        self.X_train = X_train
+        self.y_train = y_train
+        self.X_test = X_test
+        self.y_test = y_test
+        self.max_words = 1000
+        self.batch_size = 64
+        self.epochs = 3
+        self.num_classes = len(tags)
+
+        # Build the model (Neural Network)
+        # Sequential structure to store multiple sequential layers
+        self.model = Sequential()
+        self.model.add(Dense(512, input_shape=(self.max_words, )))
+        self.model.add(Activation('relu'))
+        # To prevent over fitting
+        # Dropout drops 50% of information so not to over fit model and improve performance
+        self.model.add(Dropout(0.5))
+        self.model.add(Dense(self.num_classes))
+        self.model.add(Activation('softmax'))
+        # Categorical cross entropy loss because we have multiple classes
+        self.model.compile(loss='categorical_crossentropy',
+                           optimizer='adam',
+                           metrics=['accuracy'])
+
+        tokenize = text.Tokenizer(num_words=self.max_words, char_level=False)
+        # Only fit on train, then use for testing
+        tokenize.fit_on_texts(X_train)
+
+        self.X_train = tokenize.texts_to_matrix(self.X_train)
+        self.X_test = tokenize.texts_to_matrix(self.X_test)
+
+        # label encoder to get one hot encoding for classes
+        encoder = LabelEncoder()
+        encoder.fit(self.y_train)
+        self.y_train = encoder.transform(self.y_train)
+        self.y_test = encoder.transform(self.y_test)
+
+        self.y_train = utils.to_categorical(self.y_train, self.num_classes)
+        self.y_test = utils.to_categorical(self.y_test, self.num_classes)
+
+    def train(self):
+        self.model.fit(self.X_train, self.y_train,
+                       batch_size=self.batch_size,
+                       epochs=self.epochs,
+                       verbose=True,
+                       validation_split=0.1)
+
+        score = self.model.evaluate(self.X_test, self.y_test,
+                                    batch_size=self.batch_size, verbose=True)
+        print('Test accuracy:', score[1])

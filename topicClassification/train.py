@@ -1,6 +1,6 @@
 from preprocessing import PreProcessing
 from sklearn.model_selection import train_test_split
-from Models import LR, SVM, NaiveBayes, Word2VecDeep
+from Models import LR, SVM, NaiveBayes, Word2VecDeep, BOWDeep
 
 pre = PreProcessing()
 data = pre.clean_text()
@@ -23,3 +23,4 @@ wv.train()
 
 #bow = BOWDeep(X_train, X_test, y_train, y_test, pre.tags)
 #bow.train()
+
