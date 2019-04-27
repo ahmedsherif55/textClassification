@@ -63,7 +63,7 @@ HTML decoding using lxml
 Anaconda The open-source [Anaconda Distribution](https://www.anaconda.com/distribution/) the easiest way to perform Python/R data science and machine learning on Linux, Windows, and Mac OS X
 
 ## Algorithms Explanation
-you can find them through [document.md]().
+you can find them through [document.md](document.md).
 
 ## Authors
 
