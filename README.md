@@ -77,4 +77,4 @@ See also the list of [contributors](https://github.com/ahmedsherif55/textClassif
 
 ## License
 
-This project is licensed under the FCIH License - see the [LICENSE.md]() file for details
+This project is licensed under the FCIH License - see the [LICENSE.md](LICENSE.md) file for details
