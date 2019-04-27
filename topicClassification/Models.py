@@ -5,7 +5,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.linear_model import LogisticRegression
 import nltk
 from preprocessing import PreProcessing
-from sklearn.metrics import classification_report, accuracy_score
+from sklearn.metrics import classification_report, accuracy_score, f1_score
 from gensim.models import KeyedVectors
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
@@ -48,10 +48,12 @@ class Model:
             average_score = np.average(scores[metric_name])
             print('%s : %f' % (metric_name, average_score))"""
 
+
         self.model.fit(self.X_train, self.y_train)
         y_pred = self.model.predict(self.X_test)
         print('accuracy %s' % accuracy_score(self.y_test, y_pred))
         print(classification_report(self.y_test, y_pred, target_names=self.tags))
+        return f1_score(self.y_test, y_pred)
 
 
 class NaiveBayes(Model):
@@ -164,3 +166,6 @@ class BOWDeep:
         score = self.model.evaluate(self.X_test, self.y_test,
                                     batch_size=self.batch_size, verbose=True)
         print('Test accuracy:', score[1])
+        y_pred = self.model.predict(self.X_test,
+                                    batch_size=self.batch_size, verbose=True)
+        return f1_score(self.y_test, y_pred)

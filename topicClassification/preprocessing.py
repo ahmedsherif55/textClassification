@@ -136,5 +136,5 @@ class PreProcessing:
             Examples:
                 None.
         """
-        # Stack all of np arrays into one dimensional array (flattened)
+            # Stack all of np arrays into one dimensional array (flattened)
         return np.vstack([self.word_averaging(glove_model, post) for post in text_list])
