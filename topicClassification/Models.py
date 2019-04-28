@@ -98,7 +98,7 @@ class Word2VecDeep:
 
     def train(self):
         lr = LR(self.X_train_word_average, self.X_test_word_average, self.y_train, self.y_test, self.tags)
-        lr.train(tfidf=False)
+        return lr.train(tfidf=False)
 
     # Tokenize Word
     def tokenize_text(self, text):

@@ -18,6 +18,11 @@ class PreProcessing:
         # Extract unique classes
         self.tags = self.data.tags.unique()
 
+    def plot_figure(self):
+        plt.figure(figsize=(10, 4))
+        self.data['tags'].value_counts().plot(kind='bar')
+        plt.show()
+
     def clean_text(self):
         """  Clean dataset to reduce noise.
 
